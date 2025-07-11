@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Heart, Calculator, RotateCcw, User, Ruler, Weight, Info, AlertTriangle, Calendar } from "lucide-react";
 import { bmiCalculationSchema, type BMICalculation } from "@shared/schema";
 
@@ -117,15 +118,18 @@ export default function BMICalculator() {
   }, [watchedValues]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8">
+    <div className="min-h-screen bg-background py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header Section */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 relative">
+          <div className="absolute top-0 right-0">
+            <ThemeToggle />
+          </div>
           <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-4">
             <Heart className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">BMI Calculator</h1>
-          <p className="text-slate-600 text-lg">Calculate your Body Mass Index and assess your health status</p>
+          <h1 className="text-4xl font-bold text-foreground mb-2">BMI Calculator</h1>
+          <p className="text-muted-foreground text-lg">Calculate your Body Mass Index and assess your health status</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -150,10 +154,10 @@ export default function BMICalculator() {
                       {...form.register("age", { valueAsNumber: true })}
                       className="pr-10"
                     />
-                    <Calendar className="absolute right-3 top-3 w-4 h-4 text-slate-400" />
+                    <Calendar className="absolute right-3 top-3 w-4 h-4 text-muted-foreground" />
                   </div>
                   {form.formState.errors.age && (
-                    <p className="text-sm text-red-600 flex items-center">
+                    <p className="text-sm text-destructive flex items-center">
                       <AlertTriangle className="w-4 h-4 mr-1" />
                       {form.formState.errors.age.message}
                     </p>
@@ -173,7 +177,7 @@ export default function BMICalculator() {
                         {...form.register("height", { valueAsNumber: true })}
                         className="pr-10"
                       />
-                      <Ruler className="absolute right-3 top-3 w-4 h-4 text-slate-400" />
+                      <Ruler className="absolute right-3 top-3 w-4 h-4 text-muted-foreground" />
                     </div>
                     <Select
                       value={form.watch("heightUnit")}
@@ -189,7 +193,7 @@ export default function BMICalculator() {
                     </Select>
                   </div>
                   {form.formState.errors.height && (
-                    <p className="text-sm text-red-600 flex items-center">
+                    <p className="text-sm text-destructive flex items-center">
                       <AlertTriangle className="w-4 h-4 mr-1" />
                       {form.formState.errors.height.message}
                     </p>
@@ -209,7 +213,7 @@ export default function BMICalculator() {
                         {...form.register("weight", { valueAsNumber: true })}
                         className="pr-10"
                       />
-                      <Weight className="absolute right-3 top-3 w-4 h-4 text-slate-400" />
+                      <Weight className="absolute right-3 top-3 w-4 h-4 text-muted-foreground" />
                     </div>
                     <Select
                       value={form.watch("weightUnit")}
@@ -225,7 +229,7 @@ export default function BMICalculator() {
                     </Select>
                   </div>
                   {form.formState.errors.weight && (
-                    <p className="text-sm text-red-600 flex items-center">
+                    <p className="text-sm text-destructive flex items-center">
                       <AlertTriangle className="w-4 h-4 mr-1" />
                       {form.formState.errors.weight.message}
                     </p>
@@ -266,11 +270,11 @@ export default function BMICalculator() {
                     <div className={`text-xl font-semibold mb-2 ${result.color}`}>
                       {result.category}
                     </div>
-                    <div className="text-slate-600">{result.description}</div>
+                    <div className="text-muted-foreground">{result.description}</div>
                   </div>
 
-                  <div className="bg-slate-50 rounded-lg p-4">
-                    <h3 className="font-semibold text-slate-800 mb-3">Health Assessment</h3>
+                  <div className="bg-muted rounded-lg p-4">
+                    <h3 className="font-semibold text-foreground mb-3">Health Assessment</h3>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span>Your BMI:</span>
@@ -300,35 +304,35 @@ export default function BMICalculator() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex items-center p-4 bg-blue-50 rounded-lg">
+                  <div className="flex items-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
                     <div className="w-4 h-4 bg-blue-500 rounded-full mr-4"></div>
                     <div className="flex-1">
-                      <div className="font-medium text-slate-800">Underweight</div>
-                      <div className="text-sm text-slate-600">BMI less than 18.5</div>
+                      <div className="font-medium text-foreground">Underweight</div>
+                      <div className="text-sm text-muted-foreground">BMI less than 18.5</div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center p-4 bg-green-50 rounded-lg">
+                  <div className="flex items-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
                     <div className="w-4 h-4 bg-green-500 rounded-full mr-4"></div>
                     <div className="flex-1">
-                      <div className="font-medium text-slate-800">Normal Weight</div>
-                      <div className="text-sm text-slate-600">BMI 18.5 - 24.9</div>
+                      <div className="font-medium text-foreground">Normal Weight</div>
+                      <div className="text-sm text-muted-foreground">BMI 18.5 - 24.9</div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center p-4 bg-yellow-50 rounded-lg">
+                  <div className="flex items-center p-4 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg">
                     <div className="w-4 h-4 bg-yellow-500 rounded-full mr-4"></div>
                     <div className="flex-1">
-                      <div className="font-medium text-slate-800">Overweight</div>
-                      <div className="text-sm text-slate-600">BMI 25.0 - 29.9</div>
+                      <div className="font-medium text-foreground">Overweight</div>
+                      <div className="text-sm text-muted-foreground">BMI 25.0 - 29.9</div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center p-4 bg-red-50 rounded-lg">
+                  <div className="flex items-center p-4 bg-red-50 dark:bg-red-950/20 rounded-lg">
                     <div className="w-4 h-4 bg-red-500 rounded-full mr-4"></div>
                     <div className="flex-1">
-                      <div className="font-medium text-slate-800">Obese</div>
-                      <div className="text-sm text-slate-600">BMI 30.0 and above</div>
+                      <div className="font-medium text-foreground">Obese</div>
+                      <div className="text-sm text-muted-foreground">BMI 30.0 and above</div>
                     </div>
                   </div>
                 </div>
